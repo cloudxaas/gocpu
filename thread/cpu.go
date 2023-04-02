@@ -1,5 +1,9 @@
 package cxcputhread
 
+import(
+	"flag"
+	"syscall"
+)
 var (
 	CPUThread *int
 )
