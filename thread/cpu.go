@@ -2,7 +2,7 @@ package cxcputhread
 
 import(
 	"flag"
-	"sys/unix"
+	"sys"
 )
 var (
 	CPUThread *int
