@@ -2,7 +2,7 @@ package cxcputhread
 
 import(
 	"flag"
-	"sys"
+	"golang.org/x/sys/unix"
 )
 var (
 	CPUThread *int
