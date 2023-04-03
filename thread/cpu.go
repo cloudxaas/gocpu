@@ -12,7 +12,7 @@ var (
 )
 
 func init() {
-	CPUThread = flag.Int16("t", -1, "prefork child id"))
+	CPUThread = flag.Int16("t", -1, "prefork child id")
 	flag.Parse()
 }
 
