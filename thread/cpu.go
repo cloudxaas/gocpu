@@ -1,19 +1,20 @@
 package cxcputhread
 
 import(
-	"flag"
+	"github.com/spf13/pflag"
 	"golang.org/x/sys/unix"
 )
 var (
+	//up to 65535 cpu cores supported
 	CPUThread *int16
 )
 
 func init() {
-	CPUThread = *int16(*flag.Int("t", -1, "prefork child id"))
+	CPUThread = flag.Uint16("t", -1, "prefork child id"))
 	flag.Parse()
 }
 
-func SetCPUAffinity(cpu int16) error {
+func SetCPUAffinity(cpu uint16) error {
 	var newMask unix.CPUSet
 	newMask.Set(int(cpu))
 	return unix.SchedSetaffinity(0, &newMask)
