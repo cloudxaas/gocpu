@@ -5,16 +5,16 @@ import(
 	"golang.org/x/sys/unix"
 )
 var (
-	CPUThread *int
+	CPUThread *uint16
 )
 
 func init() {
-	CPUThread = flag.Int("t", -1, "prefork child id")
+	CPUThread = uint16(flag.Int("t", -1, "prefork child id"))
 	flag.Parse()
 }
 
-func SetCPUAffinity(cpu int) error {
+func SetCPUAffinity(cpu uint16) error {
 	var newMask unix.CPUSet
-	newMask.Set(cpu)
+	newMask.Set(int(cpu))
 	return unix.SchedSetaffinity(0, &newMask)
 }
