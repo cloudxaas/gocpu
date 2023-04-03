@@ -9,7 +9,7 @@ var (
 )
 
 func init() {
-	*CPUThread = int16(*flag.Int("t", -1, "prefork child id"))
+	CPUThread = *int16(*flag.Int("t", -1, "prefork child id"))
 	flag.Parse()
 }
 
