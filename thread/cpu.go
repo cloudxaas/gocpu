@@ -6,7 +6,7 @@ import(
 )
 var (
 	//up to 65535 cpu cores supported
-	CPUThread *int16
+	CPUThread *uint16
 )
 
 func init() {
