@@ -1,9 +1,12 @@
 package cxcputhread
 
 import(
+	"runtime"
+	
 	"golang.org/x/sys/unix"
 	"github.com/cloudxaas/gohash/fnv1a32"
 	flag "github.com/spf13/pflag"
+	
 )
 var (
 	//Support up to 32000 cpu cores 
