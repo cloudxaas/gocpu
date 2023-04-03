@@ -30,3 +30,10 @@ func SetCPUAffinity(cpu int16) error {
 func CPUHash(k []byte) int16 {
 	return int16(fnv1a32.Hash(k) % uint32(runtime.NumCPU()))
 }
+
+func IsCurrentCPUID(id int16) uint8 {
+	if id == int16(*CPUThread) {
+		return 1
+	}
+	return 0
+}
