@@ -5,7 +5,8 @@ import(
 	"golang.org/x/sys/unix"
 )
 var (
-	//up to 65535 cpu cores supported
+	//though 65535, but actually support up to 32000 cpu cores 
+	//because of the way other functions wraps it
 	CPUThread *uint16
 )
 
