@@ -12,11 +12,11 @@ var (
 	//Support up to 65534 cpu cores
 	//because of the way other functions wraps it, 
         //"0" value denotes or master
-	CPUThread *uint16
+	CPUThread uint16
 )
 
 func init() {
-	CPUThread = flag.Uint16P("thread", "t", 0, "prefork child id")
+	CPUThread = *flag.Uint16P("thread", "t", 0, "prefork child id")
 	flag.Parse()
 }
 
@@ -34,7 +34,7 @@ func CPUHash(k []byte) uint16 {
 }
 
 func IsCurrentCPUID(id uint16) uint8 {
-	if id == *CPUThread {
+	if id == CPUThread-1 {
 		return 1
 	}
 	return 0
