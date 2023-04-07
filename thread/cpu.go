@@ -16,7 +16,8 @@ var (
 )
 
 func init() {
-	CPUThread = *flag.Uint16P("thread", "t", 0, "prefork child id")
+	//CPUThread = *flag.Uint16P("CPUThread", "t", 0, "prefork child id")
+	flag.Uint16VarP(&CPUThread, "CPUThread", "t", 0, "prefork child id")
 	flag.Parse()
 }
 
@@ -34,7 +35,7 @@ func CPUHash(k []byte) uint16 {
 }
 
 func IsCurrentCPUID(id uint16) uint8 {
-	if id == CPUThread-1 {
+	if id == CPUThread - 1 {
 		return 1
 	}
 	return 0
