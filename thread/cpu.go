@@ -1,32 +1,36 @@
 package cxcputhread
 
-import (
+import(
 	"runtime"
-	"github.com/zeebo/xxh3" // Updated import for xxh3
+	
 	"golang.org/x/sys/unix"
-	"github.com/spf13/pflag"
+	"github.com/cloudxaas/gohash/fnv1a32"
+	flag "github.com/spf13/pflag"
+	
 )
-
 var (
-	CPUThread uint16 // Support up to 65534 CPU cores, "0" denotes master or default
+	//Support up to 65534 cpu cores
+	//because of the way other functions wraps it, 
+        //"0" value denotes or master
+	CPUThread uint16
 )
 
-// This function should be called from the main package or higher-level logic to define flags.
-func DefineFlags() {
-	pflag.Uint16VarP(&CPUThread, "CPUThread", "t", 0, "prefork child id")
+func init() {
+	CPUThread = *flag.Uint16P("thread", "t", 0, "prefork child id")
+	flag.Parse()
 }
 
-//cpu core 0 == 1
-//cpu core 1 == 2
+//cpu core 0 = 1
+//cpu core 1 = 2
 func SetCPUAffinity(cpu uint16) error {
 	var newMask unix.CPUSet
-	newMask.Set(int(cpu) - 1)
+	newMask.Set(int(cpu)-1)
 	return unix.SchedSetaffinity(0, &newMask)
 }
 
-// Updated function to use xxh3 for hashing with AVX2 optimization when available.
+//hash based on fnv1a32, getting hashed cpu id
 func CPUHash(k []byte) uint16 {
-	return uint16(xxh3.Hash(k) % uint64(runtime.NumCPU()))
+	return uint16(fnv1a32.Hash(k) % uint32(runtime.NumCPU()))
 }
 
 func IsCurrentCPUID(id uint16) uint8 {
