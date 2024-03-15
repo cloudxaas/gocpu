@@ -30,7 +30,7 @@ func SetCPUAffinity(cpu uint16) error {
 
 // Updated function to use xxh3 for hashing with AVX2 optimization when available.
 func CPUHash(k []byte) uint16 {
-	return uint16(xxh3.Hash(k) % uint64(runtime.NumCPU()))
+	return uint16(xxh3.Hash(k) & uint64(runtime.NumCPU()-1))
 }
 
 func IsCurrentCPUID(id uint16) uint8 {
