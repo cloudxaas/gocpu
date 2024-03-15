@@ -18,7 +18,7 @@ func DefineFlags() {
 }
 
 func init() {
-	NumCPU = runtime.NumCPU()
+	NumCPU = uint16(runtime.NumCPU())
 }
 
 //cpu core 0 == 1
