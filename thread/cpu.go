@@ -24,6 +24,7 @@ func init() {
 //cpu core 1 == 2
 func SetCPUAffinity(cpu uint16) error {
 	var newMask unix.CPUSet
+	newMask.Zero()
 	newMask.Set(int(cpu) - 1)
 	return unix.SchedSetaffinity(0, &newMask)
 }
