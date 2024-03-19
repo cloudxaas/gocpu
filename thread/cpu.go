@@ -16,8 +16,10 @@ var (
 
 func init() {
 	NumCPU = uint16(runtime.NumCPU())
-	pflag.Uint16VarP(&CPUThread, "CPUThread", "t", 0, "prefork child id")
-        pflag.Parse() //parse at cxcputhread as it's very important, preparsing with another "flag" module before calling cxcputhread
+	  pflag.Uint16VarP(&CPUThread, "CPUThread", "t", 0, "prefork child id")
+
+	  //Parse it in main
+//	  pflag.Parse() //parse at cxcputhread as it's very important, preparsing with another "flag" module before calling cxcputhread
 }
 
 //cpu core 0 == 1
